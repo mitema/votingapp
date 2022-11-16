@@ -13,7 +13,7 @@ const connectToDB = async () => {
             useCreateIndex: true,
             useFindAndModify:false
         })
-        console.log("MongoDB Connected"))
+        console.log("MongoDB Connected");
     }
     catch(err){ 
         console.error(err.message);
@@ -21,13 +21,3 @@ const connectToDB = async () => {
     }
 }
 module.exports = connectToDB;
-
-/*const { MongoClient, ServerApiVersion } =  require("mongodb");
-
-const client = new MongoClient(constants.CONNECTION_URI, {useNewUrlParser:true, useUnifiedTopology:true, serverApi: ServerApiVersion.v1});
-
-client.connect(err=>{
-    const collection = client.db("test").collection("devices");
-    // perform activity
-    client.close();
-});*/
