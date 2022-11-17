@@ -13,6 +13,10 @@ const pollsSchema = new mongoose.Schema({
     options: {
         type:Array,
         required:true
+    }, 
+    vote_count: {
+        type:int,
+        required:true
     }
 })
 

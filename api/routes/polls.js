@@ -13,7 +13,7 @@ router.post('/', (req,res)=>{
 
 /* This route is for voting for a particular poll */
 router.post('/', (req,res)=>{
-    res.send('Congratula')
+    res.send('Congratulatioins, you have successfully voted for the poll')
 });
 /* This route is for sharing of posts */
 router.post('/', (req,res)=> {
