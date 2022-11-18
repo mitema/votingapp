@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const {check, validationResult } = require('express-validator');
 
-// Add validation middleware to routes
+//TODO: Add validation for all the routes
 
 // This endpoint to register a new user
 router.post('/register', 
