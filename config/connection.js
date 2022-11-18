@@ -4,16 +4,12 @@ This file provides a connection to mongodb atlas
 */
 const  config =  require('./default').config;
 const mongoose = require('mongoose');
-const db =  JSON.parse(JSON.stringify(config));
+const db =  config.mongoURI;
 
 
 const connectToDB = async () => {
     try{
-        await mongoose.connect(db,{
-            useNewUrlParser:true,
-            useCreateIndex: true,
-            useFindAndModify:false
-        })
+        await mongoose.connect(db)
         console.log("MongoDB Connected");
     }
     catch(err){ 

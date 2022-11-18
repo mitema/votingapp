@@ -7,19 +7,9 @@ const mongoose = require('mongoose');
 const validator = require('express-validator');
 
 const UserSchema =  mongoose.Schema({
-    userid:{
-        type:String,
-        required:true
-    },
-    firstname: {
+    name: {
         type:String,
         required: true,
-
-    },
-    lastname:{
-        type:String,
-        required:true,
-
     },
     password:{
         type:String,
@@ -34,7 +24,7 @@ const UserSchema =  mongoose.Schema({
         type:Date,
         default:Date.now
     }
-})
+}, { collection: 'users'})
 
 module.exports = mongoose.model('user', UserSchema)
 

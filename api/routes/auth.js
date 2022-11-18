@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const {check, validationResult } = require('express-validator');
+const User = require('../../models/user');
+const bcrypt =  require('bcrypt');
 
 //TODO: Add validation for all the routes
 
@@ -11,14 +13,46 @@ router.post('/register',
         check('email').isEmail().withMessage( "please enter a valid email"),
         check('password').isLength({min:8}).withMessage( "Please enter a password that is atleast 8 characters long")
     ],
-    (req,res)=>{
+    async (req,res)=>{
         const error = validationResult(req).formatWith(({msg})=>msg);
         const hasError = !error.isEmpty();
 
         if(hasError){
             return res.status(400).json({error:error.array()});
         }
-        res.send("This registers a new user")
+
+        const {name,email,password} = req.body
+        try{
+            user  =  await User.findOne({email});
+            if(user){
+                res.status(400).json({msg:"User already exists"});
+            }
+            user  = new User({
+                name,
+                email,
+                password
+        })
+            const salt  = await bcrypt.genSalt(10);
+            user.password  = await bcrypt.hash(password, salt);
+
+            await user.save();
+            res.send('user saved successfully')
+        }catch(error){
+            console.error(error.message);
+            res.status(500).send('Server error');
+        }
+        
+        
+
+         
+
+        // get the users details from req.body
+        // check if user exists in the database first
+        //create an instance of user
+        // add the user details to the instance
+        // hash the password using bcrpt
+        // Save the user in the database
+        //res.send("This registers a new user")
     }
   
 )

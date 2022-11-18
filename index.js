@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const auth = require('./api/routes/auth');
 require('dotenv').config();
+const connectToDB =  require('./config/connection')
 
+// This connects to the database
+connectToDB()
 
 // This helps to parse json payload encoded as data in the url, it also allows us to access req.body
 app.use(express.json()); 
