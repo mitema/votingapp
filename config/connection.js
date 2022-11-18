@@ -2,9 +2,10 @@
 Author: Mitema Emmanuel
 This file provides a connection to mongodb atlas
 */
-const  config =  require('config');
+const  config =  require('./default').config;
 const mongoose = require('mongoose');
-const db =  config.get('mongoURI');
+const db =  JSON.parse(JSON.stringify(config));
+
 
 const connectToDB = async () => {
     try{
