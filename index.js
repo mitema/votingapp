@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const auth = require('./api/routes/auth');
 require('dotenv').config();
-const connectToDB =  require('./config/connection')
+const connectToDB =  require('./config/connection');
+const jwtToken  = require("jsonwebtoken");
 
 // This connects to the database
 connectToDB()

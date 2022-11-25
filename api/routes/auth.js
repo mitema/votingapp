@@ -3,6 +3,7 @@ const router = express.Router();
 const {check, validationResult } = require('express-validator');
 const User = require('../../models/user');
 const bcrypt =  require('bcrypt');
+const jwtToken = require('jsonwebtoken')
 
 //TODO: Add validation for all the routes
 
@@ -36,7 +37,19 @@ router.post('/register',
             user.password  = await bcrypt.hash(password, salt);
 
             await user.save();
-            res.send('user saved successfully')
+            //The goal is to successfully send a jwt token to a user
+            const payload = {  
+                user: {
+                    id: user.id, 
+                }
+            }
+
+            jwtToken.sign(payload, process.env.JWT_SECRET, {
+                expiresIn: 360000
+            }, (err,token)=>{
+                if(err) throw err
+                res.json({token})
+            })
         }catch(error){
             console.error(error.message);
             res.status(500).send('Server error');
