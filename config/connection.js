@@ -1,5 +1,5 @@
 /* 
-Author: Mitema Emmanuel
+Author: Mitema P Emmanuel
 This file provides a connection to mongodb atlas
 */
 const  config =  require('./default').config;
